@@ -1,7 +1,8 @@
 # SecretSanta
-Il Secret Santa di Estatecla 🌴\
+Il Secret Santa di Estatecla 🌴
+
 Questo programma serve quando si ha un gruppo di amici simpatici ma caotici che decidono di organizzare tutti assieme un Secret Santa per le festività di Natale ma si accorgono all'ultimo secondo che alcune persone non sono state inserite nel sorteggio, mentre altre hanno già acquistato il regalo per il nome già sorteggiato.\
-Lo scopo è quindi quello di risorteggiare tutti i nomi che non hanno ancora aquistato un regalo permettendo a chi l'ha già acquistato di non dover partecipare ad un secondo sorteggio e garantendo l'anonimato (e dunque il divertimento e la sorpresa) per tutti!\
+Lo scopo è quindi quello di risorteggiare tutti i nomi che non hanno ancora aquistato un regalo permettendo a chi l'ha già acquistato di non dover partecipare ad un secondo sorteggio e garantendo l'anonimato (e dunque il divertimento e la sorpresa) per tutti!
 
 Nella cartella "files" bisogna inserire i file per i sorteggi già avvenuti.\
 Se, per esempio, Michele ha già comprato il regalo per Francesca, bisogna creare un file chiamato:
