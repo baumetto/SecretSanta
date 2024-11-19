@@ -4,28 +4,22 @@ rm -f *.txt
 # ----------------------------------------------------------------
 # List of Santas
 # ----------------------------------------------------------------
-LIST_GIFTED=( \
-  Alessio
-  Alfredo
-  Alice
-  Aufiero
-  Benedetta
-  Christian
-  Dario
-  Enzo
-  Francesca
-  Gambone
-  Giuseppe
-  Luca
-  Matteo
-  Michele
-  Ramona
-  Ruben
-  Sara
-  Stefu
-)
+input=$1
+if [ $# -ne 1 ]; then
+  echo "Error!: there is no list of Santas!"
+  exit 1
+fi
+
+LIST_NAME=$(find . -iname "${input}*")
+LIST_GIFTED=($(cat $LIST_NAME))
 
 LIST_GIFTER=(${LIST_GIFTED[@]})
+
+if [ ${#LIST_GIFTED} -lt 3 ]; then
+  echo "Error!: there are less than 3 Santas!"
+  echo "You did not think this through, did you, lad?"
+  exit 1
+fi
 
 # ----------------------------------------------------------------
 # List of excluded pairs
@@ -38,7 +32,6 @@ for input in $(ls files); do
   gifter=$(echo $input | cut -d. -f1 | awk '{print toupper(substr($1,0,1))tolower(substr($1,2))}')
   gifted=$(head -1 files/$input | awk '{print toupper(substr($1,0,1))tolower(substr($1,2))}')
   EXCLUDED_PAIR+=($gifter $gifted)
-  # mv $input $input.old
   # ----------------------------------------------------------------
   # Check if name exists
   # ----------------------------------------------------------------
@@ -64,7 +57,6 @@ for ((gifter = 0 ; gifter < ${#EXCLUDED_PAIR[@]} ; gifter=gifter+2)); do
   gifted=$((gifter+1))
   EXCLUDED_GIFTED+=("${EXCLUDED_PAIR[$gifted]}")
   EXCLUDED_GIFTER+=("${EXCLUDED_PAIR[$gifter]}")
-  # echo "${EXCLUDED_PAIR[$gifter]}, your gift is for ${EXCLUDED_PAIR[$gifted]}" | tee ${EXCLUDED_PAIR[$gifter]}.txt
   echo "${EXCLUDED_PAIR[$gifter]}, your gift is for ${EXCLUDED_PAIR[$gifted]}" > ${EXCLUDED_PAIR[$gifter]}.txt
 done
 
@@ -124,7 +116,6 @@ while [ $retry -eq 1 ]; do
     if [ $retry -eq 1 ]; then
       break
     fi
-    # echo "$gifter, your gift is for $gifted" | tee $gifter.txt
     echo "$gifter, your gift is for $gifted" > $gifter.txt
     LIST_GIFTER_NEW=()
     for gifter_old in ${LIST_GIFTER_COPY[@]}; do
