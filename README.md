@@ -7,6 +7,32 @@ Lo scopo è quindi quello di risorteggiare tutti i nomi che non hanno ancora aqu
 Anche senza le complicazioni appena presentate, il problema del sorteggio del Secret Santa è di per sè un problema matematico rilevante ed interessante.\
 Per maggiori informazioni sul tema, [questo video](https://www.youtube.com/watch?v=5kC5k5QBqcc) di Numberphile aiuterà a chiarire ogni dubbio.
 
+Nella cartella "santas" bisogna inserire il file contenente la lista dei partecipanti, ad esempio:
+```
+Estatecla.txt
+```
+La lista è una semplice sequenza di nomi:
+```
+01 Alessio
+02 Alfredo
+03 Alice
+04 Aufiero
+05 Benedetta
+06 Christian
+07 Dario
+08 Enzo
+09 Francesca
+10 Gambone
+11 Giuseppe
+12 Luca
+13 Matteo
+14 Michele
+15 Ramona
+16 Ruben
+17 Sara
+18 Stefu
+19
+```
 Nella cartella "files" bisogna inserire i file per i sorteggi già avvenuti.\
 Se, per esempio, Michele ha già comprato il regalo per Francesca, bisogna creare un file chiamato:
 ```
@@ -39,7 +65,6 @@ Alessio.txt  Alice.txt    Benedetta.txt  Dario.txt  files          Gambone.txt  
 Alfredo.txt  Aufiero.txt  Christian.txt  Enzo.txt   Francesca.txt  Giuseppe.txt  Matteo.txt  Ramona.txt   Sara.txt   Stefu.txt
 ```
 
-NOTA: per ora la lista dei partecipanti è scritta a mano all'interno di SecretSanta.sh.\
 NOTA: la lettura da file è non è case sensitive ed ignora tutti gli spazi spuri; e tutte le righe oltre la prima sono ignorate.\
 NOTA: se un nome non viene correttamente riconosciuto, lo script darà un errore e non genererà alcun output.\
 Vediamo cosa succede se, ad esempio, in Michele.txt al posto di "Benedetta" (il nome del partecipante indicato sulla lista) scriviamo "Benny" (il vezzeggiativo con cui gli amici sono soliti chiamarla):
