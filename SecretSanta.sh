@@ -1,6 +1,18 @@
 #! /bin/bash
 
+# ----------------------------------------------------------------
+# Creating required folders
+# ----------------------------------------------------------------
+if [ ! -d files ]; then
+  echo "Warning!: exclusion folder missing!"
+  mkdir files
+fi
+
+# ----------------------------------------------------------------
+# Cleaning Up
+# ----------------------------------------------------------------
 rm -f *.txt
+
 # ----------------------------------------------------------------
 # List of Santas
 # ----------------------------------------------------------------
@@ -28,9 +40,9 @@ fi
 EXCLUDED_PAIR=()
 
 # Exclude from file
-for input in $(ls files); do
-  gifter=$(echo $input | cut -d. -f1 | awk '{print toupper(substr($1,0,1))tolower(substr($1,2))}')
-  gifted=$(head -1 files/$input | awk '{print toupper(substr($1,0,1))tolower(substr($1,2))}')
+for excl in $(ls files); do
+  gifter=$(echo $excl | cut -d. -f1 | awk '{print toupper(substr($1,0,1))tolower(substr($1,2))}')
+  gifted=$(head -1 files/$excl | awk '{print toupper(substr($1,0,1))tolower(substr($1,2))}')
   EXCLUDED_PAIR+=($gifter $gifted)
   # ----------------------------------------------------------------
   # Check if name exists
