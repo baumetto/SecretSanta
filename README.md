@@ -74,3 +74,33 @@ rossimic: ./SecretSanta.sh
 Error: name in file Michele does not exist!
 ```
 In questo modo possiamo segnalare a Michele di correggere l'errore senza venire a conoscenza di chi sia la persona a cui egli debba fare il regalo.
+
+E' anche possibile inviare i file via mail.
+In tal caso il file dei nomi va aggiornato in questo modo per avere un database degli indirizzi:
+```
+01 Alessio:alessio@gmail.com
+02 Alfredo:alfredo@gmail.com
+03 Alice:alice@gmail.com
+04 Aufiero:aufiero@gmail.com
+05 Benedetta:benedetta@gmail.com
+06 Christian:christian@gmail.com
+07 Dario:dario@gmail.com
+08 Enzo:enzo@gmail.com
+09 Francesca:francesca@gmail.com
+10 Gambone:gambone@gmail.com
+11 Giuseppe:giuseppe@gmail.com
+12 Luca:luca@gmail.com
+13 Matteo:matteo@gmail.com
+14 Michele:michele@gmail.com
+15 Ramona:ramona@gmail.com
+16 Ruben:ruben@gmail.com
+17 Sara:sara@gmail.com
+18 Stefu:stefu@gmail.com
+19
+```
+Ovvero e' importante che sia utilizzato il carattere ":" come divisore tra nomi ed email.
+Il programma chiedera' a video se si vuole inviare le mail:
+```
+Would you like to send the Santas by email? (Y/N): N
+```
+Le uniche risposte accettate sono "Y" o "N", qualsiasi altra stringa risultera' in un errore.

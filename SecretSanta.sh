@@ -23,7 +23,7 @@ if [ $# -ne 1 ]; then
 fi
 
 LIST_NAME=$(find . -iname "${input}*")
-LIST_GIFTED=($(cat $LIST_NAME))
+LIST_GIFTED=($(cat $LIST_NAME | cut -d: -f1))
 
 LIST_GIFTER=(${LIST_GIFTED[@]})
 
@@ -31,6 +31,29 @@ if [ ${#LIST_GIFTED} -lt 3 ]; then
   echo "Error!: there are less than 3 Santas!"
   echo "You did not think this through, did you, lad?"
   exit 1
+fi
+
+# ----------------------------------------------------------------
+# Checking for e-mail database
+# ----------------------------------------------------------------
+# Source - https://stackoverflow.com/a
+# Posted by konsolebox, modified by community. See post 'Timeline' for change history
+# Retrieved 2025-12-12, License - CC BY-SA 4.0
+
+read -p "Would you like to send the Santas by email? (Y/N): " confirm
+if [ "$confirm" != "Y" ] && [ "$confirm" != "N" ] ; then
+  echo "Error!: select Y or N!"
+  exit 1
+fi
+if [ "$confirm" == "Y" ]; then
+  while IFS= read -r line; do
+    name=$(echo $line | cut -d: -f1)
+    email=$(echo $line | cut -s -d: -f2)
+    if [ "$email" == "" ]; then
+      echo "Error!: e-mail missing for $name!"
+      exit 1
+    fi
+  done < $LIST_NAME
 fi
 
 # ----------------------------------------------------------------
@@ -55,7 +78,7 @@ for excl in $(ls files); do
     fi
   done
   if [ $match -eq 0 ]; then
-    echo "Error: name in file $gifter does not exist!"
+    echo "Error!: name in file $gifter does not exist!"
     exit 1
   fi
 done
@@ -140,3 +163,18 @@ while [ $retry -eq 1 ]; do
 done
 
 echo "Secret Santa done!"
+
+if [ "$confirm" == "Y" ]; then
+  while IFS= read -r line; do
+    name=$(echo $line | cut -d: -f1)
+    email=$(echo $line | cut -s -d: -f2)
+    echo "Hi $name!"                             >  mail.txt
+    echo ""                                      >> mail.txt
+    echo "Here's the name of your Secret Santa!" >> mail.txt
+    echo ""                                      >> mail.txt
+    echo "Enjoy and have fun!"                   >> mail.txt
+    mailx -s "${input}'s Secret Santa!" -a $name.txt $email < mail.txt
+  done < $LIST_NAME
+  echo "Mails sent!"
+  rm -f mail.txt
+fi
